@@ -48,5 +48,33 @@ def reply_message(reply_token, text):
     print("LINE API 回應:", response.text)
     return response.status_code, response.text
 
+@app.route("/push", methods=["GET"])
+def push():
+    group_id = request.args.get("group_id")
+    if not group_id:
+        return "缺少 group_id 參數", 400
+    
+    url = "https://api.line.me/v2/bot/message/push"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {CHANNEL_ACCESS_TOKEN}"
+    }
+    data = {
+        "to": group_id,
+        "messages": [{
+            "type": "text",
+            "text": "📢 早安～今天要做的事情是：\n\n1. 記得開會\n2. 記得寫進度\n3. 加油！"
+        }]
+    }
+    
+    response = requests.post(url, headers=headers, json=data)
+    print("推播狀態碼:", response.status_code)
+    print("推播回應:", response.text)
+    
+    if response.status_code == 200:
+        return "推播成功"
+    else:
+        return f"推播失敗: {response.text}", 400
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
