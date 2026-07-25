@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-CHANNEL_ACCESS_TOKEN = os.environ.get("CHANNEL_ACCESS_TOKEN", "")
+CHANNEL_ACCESS_TOKEN = "bxjm9d9YZYklm1VFNSRQG0viXGRVzp+cG6Y7BxgS4+MacyKTLdPsX9LTSg6GUVhVJs/I/tX1SH4ha5qwn7BZCT7jR8mGhe4dlMW8ZENokEckTGhq3l+3AHJHkJg/o0K723lD0sXSmIwo+8Jbil8NigdB04t89/1O/w1cDnyilFU="
 
 @app.route("/", methods=["GET"])
 def home():
